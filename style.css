@@ -1,0 +1,683 @@
+/* ============================================================
+   1. RESET & CONFIGURACIÓN GLOBAL
+   ============================================================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #172033;
+    background: #ffffff;
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+/* ============================================================
+   2. VARIABLES CSS (TOKENS DE DISEÑO)
+   ============================================================ */
+:root {
+    --color-primary: #1565c0;
+    --color-primary-light: #42a5f5;
+    --color-accent: #2ea8ff;
+    --color-accent-hover: #1e90e0;
+    --color-dark: #07162d;
+    --color-dark-footer: #08111f;
+    --color-text: #172033;
+    --color-text-secondary: #475467;
+    --color-text-muted: #667085;
+    --color-white: #ffffff;
+    --color-bg-light: #f7f9fc;
+    --color-border-light: rgba(255, 255, 255, 0.35);
+    --gradient-blue: linear-gradient(135deg, #1565c0, #42a5f5);
+    --gradient-hero: linear-gradient(rgba(7, 22, 45, 0.82), rgba(7, 22, 45, 0.88));
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-card-hover: 0 20px 45px rgba(0, 0, 0, 0.12);
+    --shadow-dashboard: 0 25px 60px rgba(0, 0, 0, 0.35);
+    --shadow-mockup: 0 15px 40px rgba(0, 0, 0, 0.15);
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
+    --padding-section: 100px 8%;
+    --padding-section-mobile: 60px 5%;
+    --transition-base: 0.3s ease;
+}
+
+/* ============================================================
+   3. UTILIDADES
+   ============================================================ */
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--color-text);
+}
+
+.section-title p {
+    color: var(--color-text-muted);
+    font-size: 18px;
+}
+
+/* ============================================================
+   4. HEADER & NAVEGACIÓN
+   ============================================================ */
+header {
+    min-height: 100vh;
+    background: var(--gradient-hero),
+        url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=80');
+    background-size: cover;
+    background-position: center;
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 8%;
+    position: relative;
+    z-index: 10;
+}
+
+.logo {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    flex-shrink: 0;
+}
+
+.logo span {
+    color: #46b2ff;
+}
+
+/* --- Menú desktop --- */
+.menu {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.menu a {
+    color: var(--color-white);
+    font-weight: 500;
+    font-size: 16px;
+    transition: opacity var(--transition-base);
+    white-space: nowrap;
+}
+
+.menu a:hover {
+    opacity: 0.8;
+}
+
+/* --- Botón hamburguesa --- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+    z-index: 20;
+}
+
+.hamburger span {
+    display: block;
+    width: 28px;
+    height: 2.5px;
+    background: var(--color-white);
+    border-radius: 3px;
+    transition: var(--transition-base);
+    transform-origin: center;
+}
+
+/* Animación hamburguesa → X */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* ============================================================
+   5. HERO
+   ============================================================ */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    padding: 80px 8%;
+    flex: 1;
+}
+
+.hero-text {
+    max-width: 650px;
+    flex-shrink: 0;
+}
+
+.hero-text h1 {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+}
+
+.hero-text p {
+    font-size: 20px;
+    line-height: 1.8;
+    opacity: 0.95;
+}
+
+.buttons {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn-primary {
+    background: var(--color-accent);
+    color: var(--color-white);
+    padding: 16px 32px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 16px;
+    display: inline-block;
+    transition: opacity var(--transition-base), transform var(--transition-base);
+    text-align: center;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    border: 1px solid var(--color-border-light);
+    color: var(--color-white);
+    padding: 16px 32px;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-block;
+    transition: background var(--transition-base), border-color var(--transition-base);
+    text-align: center;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
+.dashboard {
+    width: 500px;
+    flex-shrink: 0;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-dashboard);
+}
+
+.dashboard img {
+    width: 100%;
+    display: block;
+}
+
+/* ============================================================
+   6. SECCIONES GENERALES
+   ============================================================ */
+section {
+    padding: var(--padding-section);
+}
+
+/* ============================================================
+   7. SECCIÓN STATS (IMPACTO)
+   ============================================================ */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.stat {
+    background: var(--color-bg-light);
+    border-radius: var(--radius-lg);
+    padding: 35px 20px;
+    text-align: center;
+    transition: transform var(--transition-base);
+}
+
+.stat:hover {
+    transform: translateY(-4px);
+}
+
+.stat h3 {
+    color: #1976d2;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.stat p {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+/* ============================================================
+   8. SECCIÓN CARDS (FUNCIONES)
+   ============================================================ */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: var(--color-white);
+    padding: 35px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.icon {
+    width: 70px;
+    height: 70px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.icon i {
+    font-size: 30px;
+    color: var(--color-white);
+}
+
+.card h3 {
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card p {
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+}
+
+/* ============================================================
+   9. SECCIÓN MOCKUP
+   ============================================================ */
+.mockup {
+    background: var(--color-bg-light);
+}
+
+.mockup-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.mockup-content h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.mockup-content p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+}
+
+.mockup-content img {
+    width: 100%;
+    max-width: 650px;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-mockup);
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   10. SECCIÓN BENEFICIOS
+   ============================================================ */
+.benefits {
+    background: var(--color-white);
+}
+
+.benefit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.benefit {
+    background: var(--color-bg-light);
+    padding: 30px;
+    border-radius: var(--radius-md);
+    transition: transform var(--transition-base);
+}
+
+.benefit:hover {
+    transform: translateY(-3px);
+}
+
+.benefit h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.benefit p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+/* ============================================================
+   11. SECCIÓN CTA
+   ============================================================ */
+.cta {
+    background: var(--gradient-blue);
+    color: var(--color-white);
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.cta p {
+    font-size: 20px;
+    opacity: 0.95;
+}
+
+.cta .btn-primary {
+    background: var(--color-white);
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-top: 30px;
+}
+
+.cta .btn-primary:hover {
+    opacity: 0.9;
+    background: #f0f4ff;
+}
+
+/* ============================================================
+   12. FOOTER
+   ============================================================ */
+footer {
+    background: var(--color-dark-footer);
+    color: var(--color-white);
+    text-align: center;
+    padding: 35px 5%;
+    font-size: 15px;
+    opacity: 0.85;
+}
+
+/* ============================================================
+   13. RESPONSIVE — TABLET (≤1000px)
+   ============================================================ */
+@media (max-width: 1000px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+        padding: 60px 5%;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 44px;
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+
+    .dashboard {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mockup-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .mockup-content img {
+        max-width: 100%;
+    }
+
+    .section-title h2 {
+        font-size: 36px;
+    }
+
+    /* Menú hamburguesa en tablet */
+    .menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--color-dark);
+        flex-direction: column;
+        gap: 0;
+        padding: 0 5% 20px;
+        border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu.active {
+        display: flex;
+    }
+
+    .menu a {
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 17px;
+    }
+
+    .menu a:last-child {
+        border-bottom: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    nav {
+        padding: 25px 5%;
+        flex-wrap: wrap;
+    }
+}
+
+/* ============================================================
+   14. RESPONSIVE — MOBILE (≤600px)
+   ============================================================ */
+@media (max-width: 600px) {
+    section {
+        padding: var(--padding-section-mobile);
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .hero-text h1 {
+        font-size: 32px;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-text p {
+        font-size: 17px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        padding: 15px 24px;
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .stat h3 {
+        font-size: 34px;
+    }
+
+    .section-title h2 {
+        font-size: 28px;
+    }
+
+    .section-title p {
+        font-size: 15px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .benefit-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .mockup-content h2 {
+        font-size: 28px;
+    }
+
+    .mockup-content p {
+        font-size: 16px;
+    }
+
+    .cta h2 {
+        font-size: 30px;
+    }
+
+    .cta p {
+        font-size: 17px;
+    }
+
+    .card {
+        padding: 25px;
+    }
+
+    .icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+    }
+
+    .icon i {
+        font-size: 24px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+    }
+
+    .dashboard {
+        border-radius: var(--radius-md);
+    }
+}
+
+/* ============================================================
+   15. RESPONSIVE — MÓVILES PEQUEÑOS (≤380px)
+   ============================================================ */
+@media (max-width: 380px) {
+    .hero-text h1 {
+        font-size: 26px;
+    }
+
+    .hero-text p {
+        font-size: 15px;
+    }
+
+    .section-title h2 {
+        font-size: 24px;
+    }
+
+    .cta h2 {
+        font-size: 25px;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .stat h3 {
+        font-size: 28px;
+    }
+}
